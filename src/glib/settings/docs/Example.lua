@@ -5,7 +5,7 @@ Settings:Set('String','something lmao')
 Settings:Set('UserSettings.SavedPositions',{{['x']=0;['y']=0;['z']=0;};{['x']=0;['y']=666;['z']=0;}}):Set('UserSettings.AgreedToTerms',true)
 print(Settings:Get('Boolean')) --> true
 print(Settings:Get('UserSettings.AgreedToTerms')) --> true
-Settings:Ensure('UserSettings.AgreedToTerms',false)
+Settings:Default('UserSettings.AgreedToTerms',false)
 print(Settings:Get('UserSettings.AgreedToTerms')) --> true
-Settings:Ensure('Feedback.IsSlibGood',1)
+Settings:Default('Feedback.IsSlibGood',1)
 print(Settings:Get('Feedback.IsSlibGood')) --> 1
