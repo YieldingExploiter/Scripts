@@ -1,4 +1,4 @@
-local slib = loadstring(game:HttpGetAsync('https://raw.githubusercontent.com/YieldingExploiter/Scripts/main/src/glib/settings/Script.lua',true))()
+local slib = loadstring(game:HttpGetAsync('https://raw.githubusercontent.com/YieldingExploiter/Scripts/main/dist/glib/settings/Script.lua',true))()
 local Settings = slib.new('Example-a29fdsakljhv7xcnqic')
 Settings:Set('Boolean',true)
 Settings:Set('String','something lmao')
