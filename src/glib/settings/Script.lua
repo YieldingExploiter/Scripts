@@ -230,6 +230,12 @@ function Settings:Reload()
   else
     self['-v>>9_82'] = { ['__sl.issljson'] = true };
   end
+  if not self['-v>>9_82']['__sl.issljson'] then
+    warn('Invalid SLJSON File - Missing __sl.issljson=true. Potential Corruption Occured.');
+    self:Set('__sl.potentialCorruptionDetected', true)
+  else
+    self:Set('__sl.potentialCorruptionDetected', false)
+  end
   return self;
 end
 
@@ -246,12 +252,6 @@ Settings.New = function( ScriptName )
   self['-v>>9_82'] = {};
   self:Reload();
   self:ForceSave();
-  if not self['-v>>9_82'].__sl.issljson then
-    warn('Invalid SLJSON File - Missing __sl.issljson=true. Potential Corruption Occured.');
-    self:Set('__sl.potentialCorruptionDetected', true)
-  else
-    self:Set('__sl.potentialCorruptionDetected', false)
-  end
   self:Set('__sl.slversion', Settings.Version)
   return self
 end;
