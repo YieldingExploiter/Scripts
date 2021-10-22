@@ -250,7 +250,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
     self['-v>>9_82'] = {};
     self:Reload();
     self:ForceSave();
-    if not self['-v>>9_82'].__sl.issljson then
+    if not self['-v>>9_82']['__sl.issljson'] then
       warn(
         'Invalid SLJSON File - Missing __sl.issljson=true. Potential Corruption Occured.'
       );
