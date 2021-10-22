@@ -169,6 +169,7 @@ return (function()
         for i, x in ipairs(v) do x.Remove() end
         table.remove(boxes, i)
       else
+        for i, x in ipairs(v) do x.Color = _G.BBconfig.espColor end
         local character = v['Character']
         local TL = camera:WorldToViewportPoint(
           (character.Root.CFrame * CFrame.new(-2, 3, 0)).p
@@ -203,6 +204,7 @@ return (function()
       -- ANCHOR ESP 
       updateEsp()
       -- ANCHOR Fly
+      flySettings.speed = _G.BBconfig.flySpeed
       if myCharacter() then
         local character = myCharacter()
         if not velPart:IsDescendantOf(character) then
@@ -231,6 +233,7 @@ return (function()
         )
       end
       -- ANCHOR Silent Aim 
+      silentFovObject.Color = _G.BBconfig.fovColor -- Live Update Config
       if isShooting and closestPlayer(_G.BBconfig.fovAmount) then
         local pos = camera:WorldToViewportPoint(
           closestPlayer(_G.BBconfig.fovAmount).Hitbox.Head.Position
