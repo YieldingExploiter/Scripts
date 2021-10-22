@@ -9,5 +9,5 @@ Changing the Name resets the Config.
 #### `Set(k,v)` -> `<Settings> self`
 
 ### Methods
-#### `Ensure(k,d)` -> `<Settings> self` 
+#### `Default(k,d)` -> `<Settings> self` 
 If there is no data for key `k`, set it to `d`.
