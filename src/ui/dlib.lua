@@ -1,5 +1,5 @@
--- Original by UNKNOWN
--- Fork Copyright (c) 2021 YieldingCoder. All Rights Reserved
+-- Original: https://v3rmillion.net/showthread.php?tid=1104704&pid=7816836
+-- Fork by YieldingCoder
 -- https://github.com/YieldingExploiter/Scripts/ -> UI -> dlib.lua
 
 local DiscordLib = {}
