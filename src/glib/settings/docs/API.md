@@ -5,8 +5,8 @@ To create a new `Settings` Class, use `SettingsLib.new("YOURSCRIPTNAME")`. If yo
 Changing the Name resets the Config.
 
 ### Self-Explanatory Methods
-`Get(k)` -> `any`
-`Set(k,v)` -> `<Settings> self`
+#### `Get(k)` -> `any`<br/>
+#### `Set(k,v)` -> `<Settings> self`
 
 ### Methods
 #### `Ensure(k,d)` -> `<Settings> self` 
