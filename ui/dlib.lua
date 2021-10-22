@@ -1,3 +1,7 @@
+-- Original by UNKNOWN
+-- Fork Copyright (c) 2021 YieldingCoder. All Rights Reserved
+-- https://github.com/YieldingExploiter/Scripts/ -> UI -> dlib.lua
+
 local DiscordLib = {}
 local UserInputService = game:GetService('UserInputService')
 local TweenService = game:GetService('TweenService')
