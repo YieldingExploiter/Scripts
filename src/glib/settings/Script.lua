@@ -186,6 +186,7 @@ Settings['-v>>9_82'] = {};
 -- })
 function Settings:Set( k, v )
   self['-v>>9_82'][k] = v;
+  self:ForceSave();
   return self;
 end
 function Settings:Get( k ) return self['-v>>9_82'][k]; end
@@ -204,21 +205,10 @@ function Settings:ForceSave()
 # SettingsLib Config Folder
 
 ## This Folder
-This folder contains the individual Files in SLJSON Format (SettingsLib JSON)
-
-## SLJSON File Format
-SLJSON is JSON with the following mandatory keys:
-- `__sl.issljson`:`true` (Ensures that it is actually sljson)
-- `__sl.slversion`:int32 (Last Version the file was Read/Written to at. Currently Unused, might be used in future. Usable by 3rd party tools to ensure version compatability)
-and the `.sl` file extension.
-
-Accoridng to the current implementation of SettingsLib, it can also have the following keys:
-- `__sl.potentialCorruptionDetected`:Boolean (If checks have failed for potential data corruption, such as issljson not being a key. Should warn if set to true.)
-
-As the End-Application, you should not write to any keys starting with `__sl` unless you are extending SettingsLib.
+This folder contains the individual Files in [SLJSON](https://github.com/YieldingExploiter/Scripts/blob/main/src/glib/settings/docs/SLJSON.md) Format
 
 ## About SettingsLib
-SettingsLib is a general Settings Library for every exploit-related use-case.
+SettingsLib is a general Settings Library for every Roblox Exploit-related use-case.
 
 ## Project Link
 [https://github.com/YieldingExploiter/Scripts/blob/main/src/glib/settings/Script.lua](https://github.com/YieldingExploiter/Scripts/blob/main/src/glib/settings/Script.lua)
@@ -240,12 +230,17 @@ function Settings:Reload()
   if isFile(path) then
     self['-v>>9_82'] = JSON.parse(readfile(path))
   else
-    self['-v>>9_82'] = {};
+    self['-v>>9_82'] = { ['__sl.issljson'] = true };
   end
   return self;
 end
 
+Settings.Version = 1;
+
 Settings.New = function( ScriptName )
+  if not ScriptName then
+    error('Provide the script name as the first parameter to Settings.new!')
+  end
   local self = setmetatable({}, { __index = Settings })
   self.Name = ScriptName;
   self.New =
@@ -253,6 +248,13 @@ Settings.New = function( ScriptName )
   self['-v>>9_82'] = {};
   self:Reload();
   self:ForceSave();
+  if not self['-v>>9_82'].__sl.issljson then
+    warn('Invalid SLJSON File - Missing __sl.issljson=true. Potential Corruption Occured.');
+    self:Set('__sl.potentialCorruptionDetected', true)
+  else
+    self:Set('__sl.potentialCorruptionDetected', false)
+  end
+  self:Set('__sl.slversion', Settings.Version)
   return self
 end;
 Settings.new = Settings.New;
