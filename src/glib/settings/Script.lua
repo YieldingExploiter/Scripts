@@ -1,6 +1,6 @@
 --[[
 
----- SettingsLib Config
+---- SettingsLib
 About
 | SettingsLib is a general Settings Library for every exploit-related use-case.
 
@@ -201,9 +201,23 @@ function Settings:ForceSave()
   if not isfile or not isfile(confDir .. '/README.md') then
     writefile(
       confDir .. '/README.md', [[
-# SettingsLib Config
+# SettingsLib Config Folder
 
-## About
+## This Folder
+This folder contains the individual Files in SLJSON Format (SettingsLib JSON)
+
+## SLJSON File Format
+SLJSON is JSON with the following mandatory keys:
+- `__sl.issljson`:`true` (Ensures that it is actually sljson)
+- `__sl.slversion`:int32 (Last Version the file was Read/Written to at. Currently Unused, might be used in future. Usable by 3rd party tools to ensure version compatability)
+and the `.sl` file extension.
+
+Accoridng to the current implementation of SettingsLib, it can also have the following keys:
+- `__sl.potentialCorruptionDetected`:Boolean (If checks have failed for potential data corruption, such as issljson not being a key. Should warn if set to true.)
+
+As the End-Application, you should not write to any keys starting with `__sl` unless you are extending SettingsLib.
+
+## About SettingsLib
 SettingsLib is a general Settings Library for every exploit-related use-case.
 
 ## Project Link
