@@ -1,3 +1,4 @@
+-- This script only contains the UI portions and a loader for the Bad Buisness Script.
 print(
   [[
   ---- Bad Buisness 2.48
