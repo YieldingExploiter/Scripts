@@ -3,8 +3,8 @@
 ## About
 SettingsLib is a general Settings Library for every exploit-related use-case.
 
-## Project Link
-[https://github.com/YieldingExploiter/Scripts/blob/main/src/glib/settings.lua](https://github.com/YieldingExploiter/Scripts/blob/main/src/glib/settings.lua)
+## Documentation
+[/src/glib/settings/docs](https://github.com/YieldingExploiter/Scripts/tree/main/src/glib/settings/docs)
 
 ## LICENSE
 Copyright © 2021 YieldingCoder
