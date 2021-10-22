@@ -4,6 +4,8 @@ About
 | SettingsLib is a general Settings Library for every exploit-related use-case.
 Project Link
 | https://github.com/YieldingExploiter/Scripts/blob/main/src/glib/settings/Script.lua
+Documentation
+| https://github.com/YieldingExploiter/Scripts/blob/main/src/glib/settings/docs/API.md
 Supported Environments
 | Script-Ware
 | Synapse-X
