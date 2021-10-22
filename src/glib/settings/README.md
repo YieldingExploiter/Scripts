@@ -1,4 +1,4 @@
-# SettingsLib Config
+# SettingsLib
 
 ## About
 SettingsLib is a general Settings Library for every exploit-related use-case.
