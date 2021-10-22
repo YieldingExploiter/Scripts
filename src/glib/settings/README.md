@@ -6,6 +6,10 @@ SettingsLib is a general Settings Library for every exploit-related use-case.
 ## Documentation
 [/src/glib/settings/docs](https://github.com/YieldingExploiter/Scripts/tree/main/src/glib/settings/docs)
 
+It's very basic because<br/>
+(a) I'm lazy, and;<br/>
+(b) It's a basic module.
+
 ## LICENSE
 Copyright © 2021 YieldingCoder
 
