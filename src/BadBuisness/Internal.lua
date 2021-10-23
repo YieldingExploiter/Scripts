@@ -50,7 +50,7 @@ return (function()
 
   -- ANCHOR Silent Aim 
   local silentFovObject = Drawing.new('Circle')
-  silentFovObject.Radius = 300
+  silentFovObject.Radius = _G.BBconfig.fovAmount
   silentFovObject.Filled = true
   silentFovObject.Transparency = _G.BBconfig.fovTransparency or 0.7
   silentFovObject.Position = Vector2.new(0, 0)
@@ -197,6 +197,7 @@ return (function()
       end
     end
   end
+  updateEsp();
 
   -- SECTION Main Loop
   rs.RenderStepped:Connect(
@@ -235,6 +236,7 @@ return (function()
       -- ANCHOR Silent Aim 
       silentFovObject.Color = _G.BBconfig.fovColor -- Live Update Config
       silentFovObject.Transparency = _G.BBconfig.fovTransparency or 0.7 -- Live Update Config
+      silentFovObject.Radius = _G.BBconfig.fovAmount or 300 -- Live Update Config
       if isShooting and closestPlayer(_G.BBconfig.fovAmount) then
         local pos = camera:WorldToViewportPoint(
           closestPlayer(_G.BBconfig.fovAmount).Hitbox.Head.Position
