@@ -160,9 +160,12 @@ return (function()
   workspace.Characters.ChildAdded:Connect(
     function( x ) if not onTeam(x) and x ~= myCharacter() then newBox(x) end end
   )
-  for i, x in ipairs(workspace.Characters:GetChildren()) do
-    if not onTeam(x) and x ~= myCharacter() then newBox(x) end
+  local forceUpdateESP = function()
+    for i, x in ipairs(workspace.Characters:GetChildren()) do
+      if not onTeam(x) and x ~= myCharacter() then newBox(x) end
+    end
   end
+  forceUpdateESP();
   local function updateEsp()
     for i, v in ipairs(boxes) do
       if not v['Character']:IsDescendantOf(workspace) then
@@ -200,8 +203,14 @@ return (function()
   updateEsp();
 
   -- SECTION Main Loop
+  local timer = 0;
   rs.RenderStepped:Connect(
-    function()
+    function( t )
+      timer = timer + t
+      if timer > 10 then
+        timer = 0;
+        forceUpdateESP()
+      end
       -- ANCHOR ESP 
       updateEsp()
       -- ANCHOR Fly
