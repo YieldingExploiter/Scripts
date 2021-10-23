@@ -10,4 +10,4 @@
   | Discord UI        | https://github.com/YieldingExploiter/Scripts/tree/main/src/ui/dlib.lua              |
 ]]
 
-loadstring(game:HttpGetAsync('https://github.com/YieldingExploiter/Scripts/blob/main/src/BadBuisness/Script.lua'))()
+loadstring(game:HttpGetAsync('https://github.com/YieldingExploiter/Scripts/blob/main/src/BadBuisness/Script.lua?raw=true'))()
