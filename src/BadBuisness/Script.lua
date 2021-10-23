@@ -1,7 +1,7 @@
 -- This script only contains the UI portions and a loader for the Bad Buisness Script.
 print(
   [[
-  ---- Bad Buisness 2.48
+  ---- Bad Buisness 2.50
   | Original Script   | https://v3rmillion.net/showthread.php?tid=1141282                                   |
 
   Credits
