@@ -19,7 +19,7 @@ local versionInfo = {
   ['Version'] = '0.1.0';
   ['Build'] = '00001';
   ['Hash'] = '01e357e'; -- Last Git hash seen on https://github.com/YieldingExploiter/Scripts/tree/main/src/BadBuisness at the time of last source modification.
-  ['LastTested'] = 1130; -- Last version the script was tested on
+  ['LastTested'] = 1139; -- Last version the script was tested on
 }
 
 local SettingsLib = loadstring(
