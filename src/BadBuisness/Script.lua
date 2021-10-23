@@ -18,8 +18,8 @@ local versionInfo = {
   ['Branch'] = 'Stable';
   ['Version'] = '0.1.0';
   ['Build'] = '00001';
-  ['Hash'] = '4d7c418'; -- Last Git hash seen on https://github.com/YieldingExploiter/Scripts/tree/main/src/BadBuisness at the time of last source modification.
-  ['LastTested'] = 1138; -- Last version the script was tested on
+  ['Hash'] = '01e357e'; -- Last Git hash seen on https://github.com/YieldingExploiter/Scripts/tree/main/src/BadBuisness at the time of last source modification.
+  ['LastTested'] = 1130; -- Last version the script was tested on
 }
 
 local SettingsLib = loadstring(
@@ -69,8 +69,7 @@ local LoadInternal = loadstring(
     ('https://github.com/YieldingExploiter/Scripts/blob/main/src/BadBuisness/Internal.lua?raw=true'),
     true
   )
-)()
-LoadInternal()
+)
 
 local DiscordLib = loadstring(
   game:HttpGetAsync(
@@ -109,10 +108,32 @@ FOV:Colorpicker(
   end
 )
 FOV:Slider(
-  'FOV Transparency', 0, 1000, Settings:Get('BBConfig.FOV.Transparency') * 1000,
-  function( new )
+  'FOV Opacity', 0, 800, Settings:Get('BBConfig.FOV.Transparency') * 1000, function( new )
     new = new / 1000
     Settings:Set('BBConfig.FOV.Transparency', new)
     _G.BBconfig.fovTransparency = new
   end
 )
+FOV:Slider(
+  'FOV Amount', 0, 1000, Settings:Get('BBConfig.FOV.Amnt'), function( new )
+    Settings:Set('BBConfig.FOV.Amnt', new)
+    _G.BBconfig.fovAmount = new
+  end
+)
+local Aimbot = Server:Channel('Aimbot')
+Aimbot:Slider(
+  'Smoothness', 0, 10, Settings:Get('BBConfig.Aimbot.Smoothness'), function( new )
+    Settings:Set('BBConfig.Aimbot.Smoothness', new)
+    _G.BBconfig.aimbotSmoothness = new
+  end
+)
+local Fly = Server:Channel('Fly')
+Fly:Slider(
+  'Speed', 0, 250, Settings:Get('BBConfig.Fly.Speed'), function( new )
+    Settings:Set('BBConfig.Fly.Speed', new)
+    _G.BBconfig.flySpeed = new
+  end
+)
+Fly:Label('Fly Keybind is F')
+Fly:Label('(might add rebinding later)')
+LoadInternal()()
