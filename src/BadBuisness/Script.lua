@@ -18,7 +18,7 @@ local versionInfo = {
   ['Branch'] = 'Stable';
   ['Version'] = '0.1.0';
   ['Build'] = '00001';
-  ['Hash'] = '01e357e'; -- Last Git hash seen on https://github.com/YieldingExploiter/Scripts/tree/main/src/BadBuisness at the time of last source modification.
+  ['Hash'] = '7ec1266'; -- Last Git hash seen on https://github.com/YieldingExploiter/Scripts/tree/main/src/BadBuisness at the time of last source modification.
   ['LastTested'] = 1139; -- Last version the script was tested on
 }
 
@@ -78,7 +78,7 @@ local DiscordLib = loadstring(
   )
 )()
 
-local win = DiscordLib:Window('Discock', versionInfo)
+local win = DiscordLib:Window('ScriptCord', versionInfo)
 if game.PlaceId ~= 3233893879 then return end
 local Server = win:Server('Bad Buisness Script', '')
 if game.PlaceVersion > versionInfo.LastTested then
