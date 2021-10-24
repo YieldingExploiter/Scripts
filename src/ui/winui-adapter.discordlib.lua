@@ -1,7 +1,16 @@
 -- discordLibAdapter is a simple Adapter for the Windows 11 UI Library allowing usage of the Discord UI Library functions (atleast a significant portion of them)
 -- This was made more as an experiment, not a final product.
 -- How to use custom Win11Libs: Set DiscordAdapter.WinLib to the actual library before calling DiscordAdapter:Window()
-local DiscordAdapter = {}
+local DiscordAdapter = setmetatable(
+  {}, {
+    __index = function( t, k )
+      error(
+        'DiscordAdapter/Win11Lib: UnimplementedException for proprety/method: ' .. k ..
+          '\nPlease report this to YieldingCoder!'
+      )
+    end;
+  }
+)
 
 DiscordAdapter.WinLib = loadstring(
   game:HttpGetAsync(
@@ -69,7 +78,11 @@ function DiscordAdapter:Window( name, versionInfo )
       return Color3.fromRGB(inTable.R, inTable.G, inTable.B)
     end
     local color3ToTable = function( inClr3 )
-      return { ['R'] = inClr3.R * 255; ['G'] = inClr3.G * 255; ['B'] = inClr3.B * 255 }
+      return {
+        ['R'] = (inClr3.R or 0) * 255;
+        ['G'] = (inClr3.G or 0) * 255;
+        ['B'] = (inClr3.B or 0) * 255;
+      }
     end
     -- ANCHOR ColorPicker
     -- NOTE Is Workaround: Individual Color Channels
