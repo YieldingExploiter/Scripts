@@ -1,6 +1,6 @@
 -- discordLibAdapter is a simple Adapter for the Windows 11 UI Library allowing usage of the Discord UI Library functions (atleast a significant portion of them)
 -- This was made more as an experiment, not a final product.
--- How to use custom Win11Libs: Set DiscordAdapter.WinLib to the actual library before calling DiscordAdapter:Window()
+-- This has had extremely minor testing, so don't expect any form of functionality kthx
 local DiscordAdapter = setmetatable(
   {}, {
     __index = function( t, k )
@@ -12,15 +12,14 @@ local DiscordAdapter = setmetatable(
   }
 )
 
-DiscordAdapter.WinLib = loadstring(
-  game:HttpGetAsync(
-    'https://raw.githubusercontent.com/YieldingExploiter/Scripts/main/dist/ui/dlib.lua',
+local Win11Lib = loadstring(
+  game:HttpGet(
+    'https://github.com/YieldingExploiter/Scripts/blob/main/src/ui/winui.lua?raw=true',
     true
   )
 )()
 
 function DiscordAdapter:Window( name, versionInfo )
-  local WinLib = DiscordAdapter.WinLib
   local Window = setmetatable(
     {}, {
       __index = function( t, k )
@@ -31,7 +30,7 @@ function DiscordAdapter:Window( name, versionInfo )
       end;
     }
   )
-  local _Win11Window = WinLib.createMenu(
+  local _Win11Window = Win11Lib.createMenu(
     name, Enum.KeyCode.World0, true, 1200, 600, '',
     game:GetService('Players').LocalPlayer.Character, 'Exploiter'
   )
