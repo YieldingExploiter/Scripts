@@ -1,4 +1,5 @@
 -- discordLibAdapter is a simple Adapter for the Windows 11 UI Library allowing usage of the Discord UI Library functions (atleast a significant portion of them)
+-- This was made more as an experiment, not a final product.
 -- How to use custom Win11Libs: Set DiscordAdapter.WinLib to the actual library before calling DiscordAdapter:Window()
 local DiscordAdapter = {}
 
@@ -39,7 +40,16 @@ function DiscordAdapter:Window( name, versionInfo )
     )
     isFirst = false;
 
-    local Server = {}
+    local Server = setmetatable(
+      {}, {
+        __index = function( t, k )
+          error(
+            'DiscordAdapter/Win11Lib: UnimplementedException for proprety/method: ' .. k ..
+              '\nPlease report this to YieldingCoder!'
+          )
+        end;
+      }
+    )
     -- ANCHOR Label
     -- NOTE Is Workaround: Toggle
     function Server:Label( text, description )
