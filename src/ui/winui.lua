@@ -8,7 +8,7 @@ Win11Lib.flags.toggles = {}
 Win11Lib.flags.dropdownToggles = {}
 
 Win11Lib.slib = {
-  ['URL'] = 'https://github.com/YieldingExploiter/Scripts/blob/main/dist/glib/settings/Script.lua?raw=true';
+  ['URL'] = 'https://github.com/YieldingExploiter/Scripts/blob/main/src/glib/settings/Script.lua?raw=true';
   ['KeyNamePrefix'] = '__discordLib.';
 }
 
@@ -69,31 +69,22 @@ Win11Lib.createMenu = function(
     )
   end
 
-  menu.Settings = nil;
-
-  -- @name GetSavingInstance(n)
-  -- @description Returns the current SettingsLib Settings Instance
-  -- @notice n MUST BE PROVIDED AND MUST BE A VALID UNIQUE IDENTIFIER FOR THE SCRIPT.
-  -- @returns Settings INSTANCE. PLEASE USE :Get(KeyName) FOR INITIAL VALUES
-  menu.GetSavingInstance = function( self, n )
-    if not self.Settings then
-      if not n then error('No name specified on initial GetSavingInstance Call') end
-      if not Win11Lib.slib.Module then
-        Win11Lib.slib.Module = loadstring(game:HttpGetAsync(Win11Lib.slib.URL, true))()
-      end
-      self.Settings = Win11Lib.slib.Module.new(n);
-      self.Settings:Set('__sl.UILibrary', 'DiscordUI'):Set(
-        '__sl.UILibraryVersion', Win11Lib.Version
-      ):Set(Win11Lib.slib.KeyNamePrefix .. 'Version', Win11Lib.Version)
-    end
-    return self.Settings;
-  end
-
   -- SECTION Create Base Instances
   -- ANCHOR Container
   local container = Instance.new('ScreenGui')
   container.Name = 'container'
-  container.Parent = game:GetService('CoreGui')
+  container.Parent = game.CoreGui
+
+  -- ANCHOR topBar
+  local topBar = Instance.new('Frame')
+  topBar.Name = 'topBar'
+  topBar.Parent = container
+  topBar.AnchorPoint = Vector2.new(0, 0)
+  topBar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+  topBar.BackgroundTransparency = 1.000
+  topBar.BorderSizePixel = 0
+  topBar.Position = UDim2.new(0.2, 0, 0.2, 0)
+  topBar.Size = UDim2.new(0, sizeX, 0, 27)
 
   -- ANCHOR MainOutline
   local mainOutline = Instance.new('ImageLabel')
@@ -176,17 +167,6 @@ Win11Lib.createMenu = function(
   UIListLayout_2.HorizontalAlignment = Enum.HorizontalAlignment.Center
   UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
   UIListLayout_2.Padding = UDim.new(0, 4)
-
-  -- ANCHOR topBar
-  local topBar = Instance.new('Frame')
-  topBar.Name = 'topBar'
-  topBar.Parent = container
-  topBar.AnchorPoint = Vector2.new(0, 0)
-  topBar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-  topBar.BackgroundTransparency = 1.000
-  topBar.BorderSizePixel = 0
-  topBar.Position = UDim2.new(0.2, 0, 0.2, 0)
-  topBar.Size = UDim2.new(0, sizeX, 0, 27)
 
   -- ANCHOR MenuName
   local menuName = Instance.new('TextLabel')
@@ -549,7 +529,30 @@ Win11Lib.createMenu = function(
     end
   )
 
-  local menu = {}
+  -- local menu = {}
+
+  -- menu.Settings = nil;
+
+  -- @name GetSavingInstance(n)
+  -- @description Returns the current SettingsLib Settings Instance
+  -- @notice n MUST BE PROVIDED AND MUST BE A VALID UNIQUE IDENTIFIER FOR THE SCRIPT.
+  -- @returns Settings INSTANCE. PLEASE USE :Get(KeyName) FOR INITIAL VALUES
+  menu.GetSavingInstance = function( n )
+    if not menu.Settings then
+      if not n then error('No name specified on initial GetSavingInstance Call') end
+      -- if not Win11Lib.slib.Module then
+      Win11Lib.slib.Module = loadstring(game:HttpGetAsync(Win11Lib.slib.URL, true))()
+      -- end
+      menu.Settings = Win11Lib.slib.Module.new(n);
+      menu.Settings:Set('__sl.UILibrary', 'DiscordUI'):Set(
+        '__sl.UILibraryVersion', Win11Lib.Version
+      ):Set(Win11Lib.slib.KeyNamePrefix .. 'Version', Win11Lib.Version)
+    end
+    return menu.Settings;
+  end
+  -- menu.GetSavingInstance(
+  --   'win11.' .. tostring(name or (tostring(game.GameId) .. tostring(game.PlaceId)))
+  -- )
 
   menu.destroyUI = function() container.Parent = nil end
 
@@ -822,7 +825,15 @@ Win11Lib.createMenu = function(
       text, flag, min, max, defaultValue, precise, descText, iconId, func
      )
       local sKey = SettingsPrefix .. text .. '.' .. flag;
-      if menu.Settings then defaultValue = menu.Settings:Ensure(sKey):Get(sKey) end
+      if menu.Settings then
+        defaultValue = menu.Settings:Default(sKey, defaultValue):Get(sKey)
+      end
+      func = (function( oldFunc )
+        return function( value )
+          oldFunc(value)
+          if menu.Settings then menu.Settings:Set(sKey, value) end
+        end
+      end)(func)
 
       local slider = Instance.new('ImageLabel')
       local outline = Instance.new('ImageLabel')
@@ -1003,7 +1014,6 @@ Win11Lib.createMenu = function(
           if input.UserInputType == Enum.UserInputType.MouseButton1 and isDown == true then
             isDown = false
             func(value)
-            if menu.Settings then menu.Settings:Set(sKey, value) end
           end
         end
       )
