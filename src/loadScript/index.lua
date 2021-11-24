@@ -113,3 +113,5 @@ local runScriptUrl = function(url,location,children)
 	local f = loadstring(Source)()
 	return f(script)
 end
+
+return runScriptUrl
