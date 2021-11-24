@@ -7,5 +7,5 @@ call `LoadScript(URL,script,{})`
 (`LoadScript(URL,Location,Children)`)
 
 ## Requirements
-- `game:HttpGetAsync()` for [index.lua](index.lua)
+- `game:HttpGetAsync()`
 - `loadstring()`
