@@ -2,7 +2,7 @@
 Creates a fake script in instance `location` with children `children`, with contents `url`. The script doesn't actully exist, but this creates a table that acts like a real script.
 
 ## How to use it
-call `LoadScript(URL,script,{})`
+call `LoadScript('https://yieldingexploiter.github.io/Scripts/src/loadScript/index.lua',script,{})`
 
 (`LoadScript(URL,Location,Children)`)
 
