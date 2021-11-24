@@ -9,3 +9,5 @@ call `LoadScript('https://yieldingexploiter.github.io/Scripts/src/loadScript/ind
 ## Requirements
 - `game:HttpGetAsync()`
 - `loadstring()`
+
+## CURRENTLY DOES NOT SUPPORT EVENTS (PRs welcome <3)
